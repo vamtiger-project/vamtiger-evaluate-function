@@ -1,6 +1,6 @@
 {
     "name": "vamtiger-evaluate-function",
-    "version": "0.0.3",
+    "version": "0.0.5-0",
     "description": "Evaluate a defined function.",
     "main": "build",
     "bin": {
@@ -33,13 +33,13 @@
         "@types/mathjs": "0.0.38",
         "@types/mocha": "^2.2.48",
         "@types/node": "^9.4.7",
+        "@types/xregexp": "^3.0.29",
         "chai": "^4.1.2",
         "mocha": "^5.0.4",
         "typescript": "^2.7.2",
         "vamtiger-node-typescript-commit": "0.0.51"
     },
     "dependencies": {
-        "@types/xregexp": "^3.0.29",
         "algebra.js": "^0.2.6",
         "mathjs": "^4.0.0",
         "vamtiger-argv": "^1.2.3",
