@@ -1,8 +1,11 @@
 {
     "name": "vamtiger-evaluate-function",
-    "version": "0.0.2",
+    "version": "0.0.3-0",
     "description": "Evaluate a defined function.",
     "main": "build",
+    "bin": {
+        "vamtiger-evaluate-function": "build/bin/index.js"
+    },
     "scripts": {
         "test": "mocha build/test --recursive",
         "build": "tsc",
