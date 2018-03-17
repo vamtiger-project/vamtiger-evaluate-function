@@ -26,7 +26,7 @@
         "url": "https://github.com/vamtiger-project/vamtiger-evaluate-function/issues"
     },
     "homepage": "https://github.com/vamtiger-project/vamtiger-evaluate-function#readme",
-    "types": "build/index.d.ts",
+    "types": "build/types/index.d.ts",
     "devDependencies": {
         "@types/algebra.js": "^0.2.1",
         "@types/chai": "^4.1.2",
@@ -42,8 +42,11 @@
     "dependencies": {
         "algebra.js": "^0.2.6",
         "mathjs": "^4.0.0",
+        "python-bridge": "^1.0.3",
+        "python.node": "^1.0.4",
         "vamtiger-argv": "^1.2.3",
         "vamtiger-bash": "0.0.16",
+        "vamtiger-get-file-data": "0.0.4",
         "xregexp": "^4.1.1"
     }
 }

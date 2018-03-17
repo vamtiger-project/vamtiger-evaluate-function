@@ -5,6 +5,14 @@ import evaluateFunction from '..';
 const args = new Args();
 const formula = args.next('--formula') as string;
 const x = args.next('--x') as string;
+const python = args.has('--python');
+const kill = args.has('--kill');
+const params = {
+    formula,
+    x,
+    python,
+    kill
+}
 
 if (!formula)
     throw new Error('No formula defined');
@@ -14,10 +22,7 @@ else
     main().catch(handleError);
 
 async function main() {
-    const result = await evaluateFunction({
-        formula,
-        x
-    });
+    const result = await evaluateFunction(params);
 
     console.log(result.value);
 }
@@ -25,5 +30,5 @@ async function main() {
 function handleError(error: Error) {
     console.error(error);
 
-    throw error;
+    process.exit(0);
 }

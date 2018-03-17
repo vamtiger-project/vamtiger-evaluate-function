@@ -1,4 +1,5 @@
 import { parse } from 'mathjs';
+import { GetValueParams as Params } from '../types';
 
 export default async (params: Params) => {
     const formula = params.formula;
@@ -7,8 +8,4 @@ export default async (params: Params) => {
     const value = compiledFormula.eval();
 
     return value;
-}
-
-export interface Params {
-    formula: string;
 }
