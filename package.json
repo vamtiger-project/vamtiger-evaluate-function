@@ -1,6 +1,6 @@
 {
     "name": "vamtiger-evaluate-function",
-    "version": "0.0.7-0",
+    "version": "0.0.7",
     "description": "Evaluate a defined function.",
     "main": "build",
     "bin": {
