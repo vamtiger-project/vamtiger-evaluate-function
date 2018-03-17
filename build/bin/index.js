@@ -14,6 +14,14 @@ const __1 = require("..");
 const args = new Args();
 const formula = args.next('--formula');
 const x = args.next('--x');
+const python = args.has('--python');
+const kill = args.has('--kill');
+const params = {
+    formula,
+    x,
+    python,
+    kill
+};
 if (!formula)
     throw new Error('No formula defined');
 else if (!x)
@@ -22,15 +30,12 @@ else
     main().catch(handleError);
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const result = yield __1.default({
-            formula,
-            x
-        });
+        const result = yield __1.default(params);
         console.log(result.value);
     });
 }
 function handleError(error) {
     console.error(error);
-    throw error;
+    process.exit(0);
 }
 //# sourceMappingURL=index.js.map

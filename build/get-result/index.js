@@ -8,16 +8,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const algebra_js_1 = require("algebra.js");
 const XRegExp = require("xregexp");
-const get_result_1 = require("./get-result");
-const get_python_result_1 = require("./get-python-result");
+const get_value_1 = require("../get-value");
 const simplify = require('mathjs').simplify;
 const regex = XRegExp('x', 'ig');
 exports.default = (params) => __awaiter(this, void 0, void 0, function* () {
-    const result = params.python ?
-        yield get_python_result_1.default(params)
-        :
-            yield get_result_1.default(params);
+    const formula = params.formula;
+    const x = params.x.toString();
+    const simplifiedFormula = simplify(formula).toString();
+    const substitutedFormula = XRegExp.replace(simplifiedFormula, regex, `(${x})`);
+    const value = yield get_value_1.default({
+        formula: substitutedFormula
+    })
+        .catch(() => algebra_js_1.parse(substitutedFormula).toString());
+    const result = {
+        formula: {
+            raw: formula,
+            substituted: substitutedFormula,
+            simplified: simplifiedFormula
+        },
+        value
+    };
     return result;
 });
 //# sourceMappingURL=index.js.map

@@ -9,15 +9,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const XRegExp = require("xregexp");
-const get_result_1 = require("./get-result");
-const get_python_result_1 = require("./get-python-result");
-const simplify = require('mathjs').simplify;
+const get_python_1 = require("../get-python");
+const types_1 = require("../types");
 const regex = XRegExp('x', 'ig');
 exports.default = (params) => __awaiter(this, void 0, void 0, function* () {
-    const result = params.python ?
-        yield get_python_result_1.default(params)
+    const formula = params.formula;
+    const x = params.x.toString();
+    const keepAlive = params.keepAlive;
+    const substitutedFormula = isNaN(Number(x)) ? XRegExp.replace(formula, regex, `(${x})`) : undefined;
+    const expression = substitutedFormula ?
+        `str(simplify(${substitutedFormula}))`
         :
-            yield get_result_1.default(params);
+            `str((${formula}).subs(x, ${x}))`;
+    const Python = yield get_python_1.default({
+        python: types_1.PythonVersion.python3
+    });
+    const value = yield Python([`${expression}`])
+        .then((currentValue) => substitutedFormula ? currentValue : Number(currentValue));
+    const result = {
+        value
+    };
+    if (!keepAlive)
+        Python.kill();
     return result;
 });
 //# sourceMappingURL=index.js.map

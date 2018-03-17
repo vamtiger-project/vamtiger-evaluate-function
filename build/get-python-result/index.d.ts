@@ -1,4 +1,4 @@
-import { MainParams as Params } from './types';
+import { MainParams as Params } from '../types';
 declare const _default: (params: Params) => Promise<{
     value: any;
 }>;

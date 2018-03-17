@@ -12,15 +12,17 @@ const path_1 = require("path");
 const chai_1 = require("chai");
 const __1 = require("../..");
 const XRegExp = require("xregexp");
-const formula = '-x^2 + 6x - 11';
+const formula = '-x**2 + 6*x - 11';
 const spaces = XRegExp('\\s+', 'g');
 const evaluateFunctionPath = path_1.resolve(__dirname, '../../bin');
-describe(`02-evaluate-function-bash - should f(x) = ${formula} where`, function () {
+describe(`04-evaluate-function-python - should f(x) = ${formula} where`, function () {
     it(`f(2) = -3`, function () {
         return __awaiter(this, void 0, void 0, function* () {
             const params = {
                 formula,
-                x: 2
+                x: 2,
+                python: true,
+                keepAlive: true
             };
             const result = yield __1.default(params);
             const expected = -3;
@@ -32,7 +34,9 @@ describe(`02-evaluate-function-bash - should f(x) = ${formula} where`, function 
         return __awaiter(this, void 0, void 0, function* () {
             const params = {
                 formula,
-                x: -10
+                x: -10,
+                python: true,
+                keepAlive: true
             };
             const result = yield __1.default(params);
             const expected = -171;
@@ -40,28 +44,31 @@ describe(`02-evaluate-function-bash - should f(x) = ${formula} where`, function 
             chai_1.expect(result.value).to.equal(expected);
         });
     });
-    it('f(x - 3) = -x^2 + 12x - 38', function () {
+    it('f(x - 3) = -x**2 + 12*x - 38', function () {
         return __awaiter(this, void 0, void 0, function* () {
             const params = {
                 formula,
-                x: 'x - 3'
+                x: 'x - 3',
+                python: true,
+                keepAlive: true
             };
             const result = yield __1.default(params);
             const value = XRegExp.replace(result.value, spaces, '');
-            const expectedValue = XRegExp.replace('-x^2 + 12x - 38', spaces, '');
+            const expectedValue = XRegExp.replace('-x**2 + 12*x - 38', spaces, '');
             chai_1.expect(result).to.be.ok;
             chai_1.expect(value).to.equal(expectedValue);
         });
     });
-    it('f(4x - 1) = -16x^2 + 32x -18', function () {
+    it('f(4x - 1) = -16*x**2 + 32*x - 18', function () {
         return __awaiter(this, void 0, void 0, function* () {
             const params = {
                 formula,
-                x: '4x - 1'
+                x: '4*x - 1',
+                python: true
             };
             const result = yield __1.default(params);
             const value = XRegExp.replace(result.value, spaces, '');
-            const expectedValue = XRegExp.replace('-16x^2 + 32x -18', spaces, '');
+            const expectedValue = XRegExp.replace('-16*x**2 + 32*x - 18', spaces, '');
             chai_1.expect(result).to.be.ok;
             chai_1.expect(value).to.equal(expectedValue);
         });
